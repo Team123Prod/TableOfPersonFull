@@ -20,11 +20,14 @@ namespace TableOfPerson.Controls
 
         private void btnAddToDB_Click(object sender, EventArgs e)
         {
-            tm.Create(new Person(Int32.Parse(txtId.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text), new List<string>()));
-            txtId.Text = "";
-            txtFirstName.Text = "";
-            txtLastName.Text = "";
-            txtAge.Text = "";
+            FormUpdate fUpdate = new FormUpdate();
+            Person p = new Person(Int32.Parse(txtId.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text), new List<string>());
+            tm.Create(p);
+            fUpdate.pUpdate1.tm = tm;
+            fUpdate.pUpdate1.AddPersonInformation(p);
+            fUpdate.Hide();
+            fUpdate.Show();
+            ParentForm.Close();
         }
     }
 }
