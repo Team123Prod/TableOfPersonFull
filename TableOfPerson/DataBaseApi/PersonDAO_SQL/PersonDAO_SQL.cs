@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
 {
-    public abstract class PersonDAO_SQL: IPerson_DAO
+    public abstract class PersonDAO_SQL: IPerson_DAO, IPhone_DAO
     {
-        protected string tableName = "";
+        protected string tablePerson = "";
+        protected string tablePhone = "";
 
         public PersonDAO_SQL()
         {
-            tableName = "person";
+            tablePerson = "person";
+            tablePhone = "phones";
         }
 
         public void Create(Person person)
         {
             OpenConnection();
             string cmd =
-                $"INSERT INTO {tableName} (Id, FirstName, LastName, Age) " +
+                $"INSERT INTO {tablePerson} (Id, FirstName, LastName, Age) " +
                 $"VALUES ({person.id}, '{person.fn}', '{person.ln}', {person.age})";
             ExecuteCommand(cmd);
             CloseConnection();
@@ -29,7 +31,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         {
             OpenConnection();
             string cmd =
-                $"Delete FROM {tableName} " +
+                $"Delete FROM {tablePerson} " +
                 $"WHERE Id = {person.id};";
             ExecuteCommand(cmd);
             CloseConnection();
@@ -38,7 +40,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         public List<Person> Read()
         {
             OpenConnection();
-            string cmd = $"SELECT * FROM {tableName};";
+            string cmd = $"SELECT * FROM {tablePerson} LEFT JOIN {tablePhone} ON {tablePerson}.Id = {tablePhone}.IdPerson;";
             List<Person> listPerson = ReadData(cmd);
             CloseConnection();
             return listPerson;
@@ -48,7 +50,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         {
             OpenConnection();
             string cmd =
-                $"UPDATE {tableName} " +
+                $"UPDATE {tablePerson} " +
                 $"SET FirstName = '{person.fn}', LastName='{person.ln}', Age={person.age} " +
                 $"WHERE Id = {person.id};";
             ExecuteCommand(cmd);
@@ -62,6 +64,15 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
 
         public void AddPhone(int id, string phone)
         {
+            OpenConnection();
+            string cmd =
+                $"INSERT INTO {tablePhone} (IdPerson, Phone) " +
+                $"VALUES ('{id}', '{phone}')";
+            ExecuteCommand(cmd);
+            CloseConnection();
+        }
+        public void DeletePhone(int id)
+        {
             throw new NotImplementedException();
         }
 
@@ -69,5 +80,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

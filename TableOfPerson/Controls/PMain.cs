@@ -19,9 +19,8 @@ namespace TableOfPerson.Controls
 
             tm = new TableModel();
 
-            comboDB.SelectedIndex = 0;
-
-            tm.SetDataBase("MsSQL");
+            comboDB.SelectedIndex = 13;
+            
         }
         private Person GetPerson()
         {
@@ -84,7 +83,7 @@ namespace TableOfPerson.Controls
 
         private void comboDB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tm.SetDataBase(comboDB.SelectedItem.ToString());
+           tm.SetDataBase(comboDB.SelectedItem.ToString());
         }
     }
 }

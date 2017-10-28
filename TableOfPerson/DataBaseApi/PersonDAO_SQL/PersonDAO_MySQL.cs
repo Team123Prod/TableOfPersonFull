@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 using TableOfPerson.DataBaseApi.PersonDAO_SQL;
+using TableOfPerson.DataBaseApi;
 
 namespace TableOfPerson
 {
@@ -15,9 +16,9 @@ namespace TableOfPerson
         public PersonDAO_MySQL()
         {
             string MySQLconnString = @"Server=localhost;" +
-                                     @"Database=bisser;" +
+                                     @"Database=personbd;" +
                                      @"Uid=root;" +
-                                     @"Pwd=;";
+                                     @"Pwd=1111;";
 
             connection = new MySqlConnection(MySQLconnString);
         }
@@ -40,16 +41,24 @@ namespace TableOfPerson
 
         protected override List<Person> ReadData(string cmd)
         {
-            MySqlCommand sqlCmd = new MySqlCommand(cmd, connection);
-            MySqlDataReader reader = sqlCmd.ExecuteReader();
             List<Person> listPerson = new List<Person>();
 
-            while (reader.Read())
+            MySqlCommand sqlCmdPerson = new MySqlCommand(cmd, connection);
+            MySqlDataReader readerPerson = sqlCmdPerson.ExecuteReader();
+            while (readerPerson.Read())
             {
-                //listPerson.Add(new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                //если idPerson уже содержится, то добавляем еще один телефон
+                if (listPerson.Exists(x => x.id == readerPerson.GetInt32(0)))
+                {
+                    listPerson.FirstOrDefault(x => x.id == readerPerson.GetInt32(0)).listOfPhones.Add(new Phone(readerPerson.GetInt32(0), readerPerson.GetString(4)));
+                }
+                //если idPerson нет в списке
+                else
+                    listPerson.Add(new Person(readerPerson.GetInt32(0), readerPerson.GetString(1), readerPerson.GetString(2),
+                    readerPerson.GetInt32(3), new List<Phone>(new Phone(1, "+38095"))));
             }
+            readerPerson.Close();
 
-            reader.Close();
             return listPerson;
         }
         

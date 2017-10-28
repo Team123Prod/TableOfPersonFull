@@ -18,7 +18,7 @@ namespace TableOfPerson
             string user = "sa";
             string pass = "1111";
 
-            tableName = "person";
+            tablePerson = "person";
             org.h2.Driver.load();
             connection = DriverManager.getConnection(connectionH2, user, pass);
         }

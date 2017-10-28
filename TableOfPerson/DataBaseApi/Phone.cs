@@ -15,7 +15,7 @@ namespace TableOfPerson.DataBaseApi
         [BsonId]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int id { get; set; } //id phone
         public string phone { get; set; }
 
         public Phone()
