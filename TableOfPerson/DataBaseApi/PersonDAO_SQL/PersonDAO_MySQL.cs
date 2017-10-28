@@ -44,25 +44,26 @@ namespace TableOfPerson
             List<Person> listPerson = new List<Person>();
 
             MySqlCommand sqlCmdPerson = new MySqlCommand(cmd, connection);
-            MySqlDataReader readerPerson = sqlCmdPerson.ExecuteReader();
-            while (readerPerson.Read())
+            MySqlDataReader reader = sqlCmdPerson.ExecuteReader();
+            while (reader.Read())
             {
                 //если idPerson уже содержится, то добавляем еще один телефон
-                if (listPerson.Exists(x => x.id == readerPerson.GetInt32(0)))
+                if (listPerson.Exists(x => x.id == reader.GetInt32(0)))
                 {
-                    listPerson.FirstOrDefault(x => x.id == readerPerson.GetInt32(0)).listOfPhones.Add(new Phone(readerPerson.GetInt32(5), readerPerson.GetString(6)));
+                    listPerson.FirstOrDefault(x => x.id == reader.GetInt32(0)).listOfPhones.Add(new Phone(reader.GetInt32(4), reader.GetInt32(5), reader.GetString(6)));
                 }
-                else if (readerPerson.IsDBNull(readerPerson.GetOrdinal("IdPhones")) || readerPerson.IsDBNull(readerPerson.GetOrdinal("Phone")))
+                //если у Person не телефонов
+                else if (reader.IsDBNull(reader.GetOrdinal("IdPhones")) || reader.IsDBNull(reader.GetOrdinal("Phone")))
                 {
-                    listPerson.Add(new Person(readerPerson.GetInt32(0), readerPerson.GetString(1), readerPerson.GetString(2),
-                    readerPerson.GetInt32(3), new List<Phone>()));
+                    listPerson.Add(new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
+                    reader.GetInt32(3), new List<Phone>()));
                 }
                 //если idPerson нет в списке
                 else
-                    listPerson.Add(new Person(readerPerson.GetInt32(0), readerPerson.GetString(1), readerPerson.GetString(2),
-                    readerPerson.GetInt32(3), new List<Phone>() { new Phone(readerPerson.GetInt32(5), readerPerson.GetString(6)) }));
+                    listPerson.Add(new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
+                    reader.GetInt32(3), new List<Phone>() { new Phone(reader.GetInt32(4), reader.GetInt32(5), reader.GetString(6)) }));
             }
-            readerPerson.Close();
+            reader.Close();
 
             return listPerson;
         }

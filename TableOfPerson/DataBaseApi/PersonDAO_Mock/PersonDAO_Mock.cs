@@ -13,10 +13,10 @@ namespace TableOfPerson.DataBaseApi
         public PersonDAO_Mock()
         {
             persons = new List<Person>();
-            persons.Add(new Person(1, "Vasya", "Pupkin", 22, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
-            persons.Add(new Person(2, "Kolya", "Lupkin", 33, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
-            persons.Add(new Person(3, "Roman", "Shysh", 22, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
-            persons.Add(new Person(4, "Kate", "Pupkin", 21, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
+            persons.Add(new Person(1, "Vasya", "Pupkin", 22, new List<Phone>() { new Phone(1, 1, "0967731623"), new Phone(2, 1, "0953331622") }));
+            persons.Add(new Person(2, "Kolya", "Lupkin", 33, new List<Phone>() { new Phone(1, 2, "0967731623"), new Phone(2, 2, "0953331622") }));
+            persons.Add(new Person(3, "Roman", "Shysh", 22, new List<Phone>() { new Phone(1, 3, "0967731623"), new Phone(2, 3, "0953331622") }));
+            persons.Add(new Person(4, "Kate", "Pupkin", 21, new List<Phone>() { new Phone(1, 4, "0967731623"), new Phone(2, 4, "0953331622") }));
         }
 
         public void AddPhone(int id, string phone)
@@ -25,8 +25,8 @@ namespace TableOfPerson.DataBaseApi
             {
                 if (id == p.id)
                 {
-                    int idP = (p.listOfPhones.Count + p.fn.Length) * 3;
-                    p.listOfPhones.Add(new Phone(idP, phone));
+                    int idPhone = (p.listOfPhones.Count + p.fn.Length) * 3;
+                    p.listOfPhones.Add(new Phone(idPhone, p.id, phone));
                     break;
                 }
             }

@@ -30,9 +30,15 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         public void Delete(Person person)
         {
             OpenConnection();
+            if (person.listOfPhones != null)
+            {
+                DeletePhone(person.id);
+            }
+
             string cmd =
                 $"Delete FROM {tablePerson} " +
                 $"WHERE Id = {person.id};";
+
             ExecuteCommand(cmd);
             CloseConnection();
         }
@@ -40,7 +46,9 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
         public List<Person> Read()
         {
             OpenConnection();
-            string cmd = $"SELECT * FROM {tablePerson} LEFT JOIN {tablePhone} ON {tablePerson}.Id = {tablePhone}.IdPerson;";
+            string cmd = 
+                $"SELECT * FROM {tablePerson} LEFT JOIN {tablePhone} " +
+                $"ON {tablePerson}.Id = {tablePhone}.IdPerson;";
             List<Person> listPerson = ReadData(cmd);
             CloseConnection();
             return listPerson;
@@ -57,10 +65,6 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
             CloseConnection();
         }
 
-        abstract protected void CloseConnection();
-        abstract protected void OpenConnection();
-        abstract protected void ExecuteCommand(string cmd);
-        abstract protected List<Person> ReadData(string cmd);
 
         public void AddPhone(int id, string phone)
         {
@@ -71,16 +75,30 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
             ExecuteCommand(cmd);
             CloseConnection();
         }
-        public void DeletePhone(int id)
+        public void DeletePhone(int idPerson)
         {
-            throw new NotImplementedException();
+            string cmd =
+                $"Delete FROM {tablePhone} " +
+                $"WHERE IdPerson = {idPerson};";
         }
 
         public List<Person> Search(string searchLine)
         {
-            throw new NotImplementedException();
+            List<Person> list = new List<Person>();
+
+            //OpenConnection();
+            //string cmd = $"SELECT * FROM {tablePerson} WHERE field_name = '{searchLine}'";
+            //ExecuteCommand(cmd);
+            //CloseConnection();
+
+
+            return list;
         }
 
+        abstract protected void CloseConnection();
+        abstract protected void OpenConnection();
+        abstract protected void ExecuteCommand(string cmd);
+        abstract protected List<Person> ReadData(string cmd);
         
     }
 }
