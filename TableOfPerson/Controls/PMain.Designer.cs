@@ -62,6 +62,7 @@
             this.comboDB.Name = "comboDB";
             this.comboDB.Size = new System.Drawing.Size(121, 21);
             this.comboDB.TabIndex = 18;
+            this.comboDB.SelectedIndexChanged += new System.EventHandler(this.comboDB_SelectedIndexChanged);
             // 
             // btnDelete
             // 

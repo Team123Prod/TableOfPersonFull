@@ -21,7 +21,7 @@ namespace TableOfPerson.Controls
 
             comboDB.SelectedIndex = 0;
 
-            tm.SetDataBase("Mock");
+            tm.SetDataBase("MsSQL");
         }
         private Person GetPerson()
         {
@@ -80,6 +80,11 @@ namespace TableOfPerson.Controls
             fUpdate.Hide();
             fUpdate.Show();
 
+        }
+
+        private void comboDB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tm.SetDataBase(comboDB.SelectedItem.ToString());
         }
     }
 }
