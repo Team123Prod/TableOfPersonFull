@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson.Serialization.Attributes;
+using TableOfPerson.DataBaseApi;
 
 namespace TableOfPerson
 {
@@ -19,13 +20,13 @@ namespace TableOfPerson
         public string fn { get; set; }
         public string ln { get; set; }
         public int age { get; set; }
-        public List<string> listOfPhones { get; set; }
+        public List<Phone> listOfPhones { get; set; }
 
         public Person()
         {
 
         }
-        public Person(int id, string fn, string ln, int age, List<string> listOfPhones)
+        public Person(int id, string fn, string ln, int age, List<Phone> listOfPhones)
         {
             this.id = id;
             this.fn = fn;

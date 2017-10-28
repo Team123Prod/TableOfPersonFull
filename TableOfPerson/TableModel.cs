@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using TableOfPerson.DataBaseApi;
 
 namespace TableOfPerson
 {
@@ -11,10 +12,12 @@ namespace TableOfPerson
     {
         List<Person> persons = null;
         IPerson_DAO db = null;
+        IPhone_DAO dbPhone = null;
 
         public void SetDataBase(string key)
         {
             db = DBFactory.getInstance(key);
+            dbPhone = (IPhone_DAO)db;
         }
 
         public void Create(Person p)
@@ -67,9 +70,9 @@ namespace TableOfPerson
         {
             db.Update(p);
         }
-        public void AddPhone(int id, string phone)
+        public void AddPhone(int idPerson, string phone)
         {
-            db.AddPhone(id, phone);
+            dbPhone.AddPhone(idPerson, phone);
         }
 
         public void Delete(int id)

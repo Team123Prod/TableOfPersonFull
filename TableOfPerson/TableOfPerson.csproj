@@ -195,6 +195,8 @@
     <Compile Include="Controls\PUpdate.Designer.cs">
       <DependentUpon>PUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseApi\IPhone_DAO.cs" />
+    <Compile Include="DataBaseApi\Phone.cs" />
     <Compile Include="FormCreate.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,7 +12,6 @@ namespace TableOfPerson
         List<Person> Read();
         void Update(Person p);
         void Delete(Person p);
-        void AddPhone(int id, string phone);
         List<Person> Search(string searchLine);
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TableOfPerson.DataBaseApi;
 
 namespace TableOfPerson.Controls
 {
@@ -21,7 +22,7 @@ namespace TableOfPerson.Controls
         private void btnAddToDB_Click(object sender, EventArgs e)
         {
             FormUpdate fUpdate = new FormUpdate();
-            Person p = new Person(Int32.Parse(txtId.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text), new List<string>());
+            Person p = new Person(Int32.Parse(txtId.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text), new List<Phone>());
             tm.Create(p);
             fUpdate.pUpdate1.tm = tm;
             fUpdate.pUpdate1.AddPersonInformation(p);

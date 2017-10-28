@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace TableOfPerson.DataBaseApi
 {
-    public class PersonDAO_Mock: IPerson_DAO
+    public class PersonDAO_Mock: IPerson_DAO, IPhone_DAO
     {
         List<Person> persons = null;
 
         public PersonDAO_Mock()
         {
             persons = new List<Person>();
-            persons.Add(new Person(1, "Vasya", "Pupkin", 22, new List<string>() { "0967731623", "0998765543" }));
-            persons.Add(new Person(2, "Kolya", "Lupkin", 33, new List<string>() { "0976731654", "0951464341" }));
-            persons.Add(new Person(3, "Roman", "Shysh", 22, new List<string>() { "096773343", "0942765543" }));
-            persons.Add(new Person(4, "Kate", "Pupkin", 21, new List<string>() { "0967731623", "0394765543" }));
+            persons.Add(new Person(1, "Vasya", "Pupkin", 22, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
+            persons.Add(new Person(2, "Kolya", "Lupkin", 33, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
+            persons.Add(new Person(3, "Roman", "Shysh", 22, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
+            persons.Add(new Person(4, "Kate", "Pupkin", 21, new List<Phone>() { new Phone(1, "0967731623"), new Phone(2, "0953331622") }));
         }
 
         public void AddPhone(int id, string phone)
@@ -25,7 +25,8 @@ namespace TableOfPerson.DataBaseApi
             {
                 if (id == p.id)
                 {
-                    p.listOfPhones.Add(phone);
+                    int idP = (p.listOfPhones.Count + p.fn.Length) * 3;
+                    p.listOfPhones.Add(new Phone(idP, phone));
                     break;
                 }
             }
@@ -39,6 +40,11 @@ namespace TableOfPerson.DataBaseApi
         public void Delete(Person p)
         {
             persons.RemoveAll(x => x.id == p.id);
+        }
+
+        public void DeletePhone(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Person> Read()

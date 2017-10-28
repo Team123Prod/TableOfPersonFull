@@ -10,11 +10,6 @@ namespace TableOfPerson.DataBaseApi
     public class PersonDAO_MsSQL_EF: IPerson_DAO
     {
 
-        public void AddPhone(int id, string phone)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Create(Person p)
         {
             using (PersonContext context = new PersonContext())

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TableOfPerson.DataBaseApi;
 
 namespace TableOfPerson.Controls
 {
@@ -48,9 +49,9 @@ namespace TableOfPerson.Controls
             labelLn.Text += person.ln;
             labelAge.Text += person.age.ToString();
 
-            foreach (string phone in person.listOfPhones)
+            foreach (Phone phone in person.listOfPhones)
             {
-                listBoxPhones.Items.Add(phone);
+                listBoxPhones.Items.Add(phone.phone);
             }
         }
     }

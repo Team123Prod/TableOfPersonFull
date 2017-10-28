@@ -44,12 +44,12 @@
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelFn = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listBoxPhones = new System.Windows.Forms.ListBox();
             this.labelAge = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
             this.labelLn = new System.Windows.Forms.Label();
-            this.listBoxPhones = new System.Windows.Forms.ListBox();
-            this.labelFn = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -84,7 +84,7 @@
             // 
             this.btnAddPhone.Location = new System.Drawing.Point(70, 109);
             this.btnAddPhone.Name = "btnAddPhone";
-            this.btnAddPhone.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPhone.Size = new System.Drawing.Size(79, 23);
             this.btnAddPhone.TabIndex = 40;
             this.btnAddPhone.Text = "Add";
             this.btnAddPhone.UseVisualStyleBackColor = true;
@@ -221,6 +221,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information about Person";
             // 
+            // labelFn
+            // 
+            this.labelFn.AutoSize = true;
+            this.labelFn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFn.Location = new System.Drawing.Point(6, 51);
+            this.labelFn.Name = "labelFn";
+            this.labelFn.Size = new System.Drawing.Size(91, 16);
+            this.labelFn.TabIndex = 31;
+            this.labelFn.Text = "FirstName:  ";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listBoxPhones);
@@ -231,6 +241,15 @@
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Phones";
+            // 
+            // listBoxPhones
+            // 
+            this.listBoxPhones.FormattingEnabled = true;
+            this.listBoxPhones.ItemHeight = 15;
+            this.listBoxPhones.Location = new System.Drawing.Point(6, 19);
+            this.listBoxPhones.Name = "listBoxPhones";
+            this.listBoxPhones.Size = new System.Drawing.Size(203, 94);
+            this.listBoxPhones.TabIndex = 0;
             // 
             // labelAge
             // 
@@ -261,25 +280,6 @@
             this.labelLn.Size = new System.Drawing.Size(90, 16);
             this.labelLn.TabIndex = 23;
             this.labelLn.Text = "LastName:  ";
-            // 
-            // listBoxPhones
-            // 
-            this.listBoxPhones.FormattingEnabled = true;
-            this.listBoxPhones.ItemHeight = 15;
-            this.listBoxPhones.Location = new System.Drawing.Point(6, 19);
-            this.listBoxPhones.Name = "listBoxPhones";
-            this.listBoxPhones.Size = new System.Drawing.Size(203, 94);
-            this.listBoxPhones.TabIndex = 0;
-            // 
-            // labelFn
-            // 
-            this.labelFn.AutoSize = true;
-            this.labelFn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFn.Location = new System.Drawing.Point(6, 51);
-            this.labelFn.Name = "labelFn";
-            this.labelFn.Size = new System.Drawing.Size(91, 16);
-            this.labelFn.TabIndex = 31;
-            this.labelFn.Text = "FirstName:  ";
             // 
             // PUpdate
             // 
