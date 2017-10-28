@@ -50,12 +50,17 @@ namespace TableOfPerson
                 //если idPerson уже содержится, то добавляем еще один телефон
                 if (listPerson.Exists(x => x.id == readerPerson.GetInt32(0)))
                 {
-                    listPerson.FirstOrDefault(x => x.id == readerPerson.GetInt32(0)).listOfPhones.Add(new Phone(readerPerson.GetInt32(0), readerPerson.GetString(4)));
+                    listPerson.FirstOrDefault(x => x.id == readerPerson.GetInt32(0)).listOfPhones.Add(new Phone(readerPerson.GetInt32(5), readerPerson.GetString(6)));
+                }
+                else if (readerPerson.IsDBNull(readerPerson.GetOrdinal("IdPhones")) || readerPerson.IsDBNull(readerPerson.GetOrdinal("Phone")))
+                {
+                    listPerson.Add(new Person(readerPerson.GetInt32(0), readerPerson.GetString(1), readerPerson.GetString(2),
+                    readerPerson.GetInt32(3), new List<Phone>()));
                 }
                 //если idPerson нет в списке
                 else
                     listPerson.Add(new Person(readerPerson.GetInt32(0), readerPerson.GetString(1), readerPerson.GetString(2),
-                    readerPerson.GetInt32(3), new List<Phone>(new Phone(1, "+38095"))));
+                    readerPerson.GetInt32(3), new List<Phone>() { new Phone(readerPerson.GetInt32(5), readerPerson.GetString(6)) }));
             }
             readerPerson.Close();
 
