@@ -29,5 +29,10 @@ namespace TableOfPerson.DataBaseApi
             this.idPerson = idPerson;
             this.phone = phone;
         }
+        public Phone(int idPerson, string phone)
+        {
+            this.idPerson = idPerson;
+            this.phone = phone;
+        }
     }
 }

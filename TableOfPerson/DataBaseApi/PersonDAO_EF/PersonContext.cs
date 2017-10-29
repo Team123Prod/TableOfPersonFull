@@ -10,11 +10,12 @@ namespace TableOfPerson.DataBaseApi
     public class PersonContext: DbContext
     {
         public PersonContext() 
-            : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\COURSE\TableOfPerson\TableOfPerson\DB_empty.mdf;Integrated Security=True")
+            : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\COURSE\TABLE_DB\TableOfPersonFull Last\TableOfPerson\DB_EF.mdf;Integrated Security=True")
         {
 
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Phone> Phones { get; set; }
     }
 }
