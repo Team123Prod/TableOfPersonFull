@@ -80,7 +80,17 @@ namespace TableOfPerson.DataBaseApi
         
         public List<Person> Search(string searchLine)
         {
-            throw new NotImplementedException();
+            List<Person> persons = Read();
+            List<Person> list = new List<Person>();
+            foreach (Person p in persons)
+            {
+                if (searchLine == p.id.ToString() || searchLine == p.fn || searchLine == p.ln || searchLine == p.age.ToString())
+                {
+                    list.Add(p);
+                }
+            }
+
+            return list;
         }
 
     }

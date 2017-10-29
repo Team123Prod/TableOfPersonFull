@@ -8,51 +8,58 @@ using MongoDB.Driver;
 
 namespace TableOfPerson.DataBaseApi
 {
-    public class PersonDAO_MongoDB: IPerson_DAO
+    public class PersonDAO_MongoDB: IPerson_DAO, IPhone_DAO
     {
-        IMongoCollection<Person> collection = null;
+        IMongoCollection<Person> persons = null;
+        IMongoCollection<Phone> phones = null;
         public PersonDAO_MongoDB()
         {
             string strConn = @"mongodb://localhost:27017";
 
             MongoClient client = new MongoClient(strConn);
             IMongoDatabase database = client.GetDatabase("mongoPerson");
-            collection = database.GetCollection<Person>("people");
+            persons = database.GetCollection<Person>("people");
+            phones = database.GetCollection<Phone>("phones");
         }
-
-        public void AddPhone(int id, string phone)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void Create(Person person)
         {
-            if (collection.Find(x => x.id == person.id).ToList().Count == 0)
+            if (persons.Find(x => x.id == person.id).ToList().Count == 0)
             {
-                collection.InsertOne(person);
+                persons.InsertOne(person);
             }
         }
 
         public void Delete(Person person)
         {
-            collection.DeleteOne(x => x.id == person.id);
+            persons.DeleteOne(x => x.id == person.id);
         }
 
         public List<Person> Read()
         {
             List<Person> listPerson = new List<Person>();
-            listPerson = collection.Find(x => true).ToList();
+            listPerson = persons.Find(x => true).ToList();
             return listPerson;
+        }
+        
+        public void Update(Person person)
+        {
+            persons.ReplaceOne(x => x.id == person.id, person);
+        }
+        public void AddPhone(int id, string phone)
+        {
+            List<Phone> phoneList = phones.Find(x => true).ToList();
+            // ---------------------
+        }
+        
+        public void DeletePhone(int idPerson, string numbersOfPhone)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Person> Search(string searchLine)
         {
             throw new NotImplementedException();
-        }
-
-        public void Update(Person person)
-        {
-            collection.ReplaceOne(x => x.id == person.id, person);
         }
     }
 }
