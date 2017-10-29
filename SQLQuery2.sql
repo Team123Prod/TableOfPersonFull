@@ -1,0 +1,1 @@
+﻿ SELECT * FROM person LEFT JOIN phones ON person.Id = phones.IdPerson

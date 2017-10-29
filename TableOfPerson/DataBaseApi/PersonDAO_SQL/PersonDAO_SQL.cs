@@ -80,6 +80,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
             string cmd =
                 $"Delete FROM {tablePhone} " +
                 $"WHERE IdPerson = {idPerson};";
+            ExecuteCommand(cmd);
         }
 
         public List<Person> Search(string searchLine)

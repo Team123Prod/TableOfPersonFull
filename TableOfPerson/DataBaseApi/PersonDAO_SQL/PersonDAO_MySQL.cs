@@ -41,10 +41,10 @@ namespace TableOfPerson
 
         protected override List<Person> ReadData(string cmd)
         {
-            List<Person> listPerson = new List<Person>();
+            MySqlCommand sqlCmd = new MySqlCommand(cmd, connection);
+            MySqlDataReader reader = sqlCmd.ExecuteReader();
 
-            MySqlCommand sqlCmdPerson = new MySqlCommand(cmd, connection);
-            MySqlDataReader reader = sqlCmdPerson.ExecuteReader();
+            List<Person> listPerson = new List<Person>();
             while (reader.Read())
             {
                 //если idPerson уже содержится, то добавляем еще один телефон
