@@ -94,13 +94,15 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_SQL
 
         public List<Person> Search(string searchLine)
         {
+            List<Person> persons = Read();
             List<Person> list = new List<Person>();
-
-            //OpenConnection();
-            //string cmd = $"SELECT * FROM {tablePerson} WHERE field_name = '{searchLine}'";
-            //ExecuteCommand(cmd);
-            //CloseConnection();
-
+            foreach (Person p in persons)
+            {
+                if (searchLine == p.id.ToString() || searchLine == p.fn || searchLine == p.ln || searchLine == p.age.ToString())
+                {
+                    list.Add(p);
+                }
+            }
 
             return list;
         }

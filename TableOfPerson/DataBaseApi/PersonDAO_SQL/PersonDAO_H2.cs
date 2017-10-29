@@ -18,8 +18,7 @@ namespace TableOfPerson
             string connectionH2 = "jdbc:h2:tcp://localhost/~/test";
             string user = "sa";
             string pass = "1111";
-
-            //tableName = "person";
+            
             org.h2.Driver.load();
             connection = DriverManager.getConnection(connectionH2, user, pass);
         }
