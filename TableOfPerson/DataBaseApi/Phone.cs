@@ -15,16 +15,18 @@ namespace TableOfPerson.DataBaseApi
         [BsonId]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int id { get; set; } //id phone
+        public int idPerson { get; set; }
         public string phone { get; set; }
 
         public Phone()
         {
 
         }
-        public Phone(int id, string phone)
+        public Phone(int id, int idPerson, string phone)
         {
             this.id = id;
+            this.idPerson = idPerson;
             this.phone = phone;
         }
     }

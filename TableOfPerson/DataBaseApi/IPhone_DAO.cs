@@ -8,7 +8,7 @@ namespace TableOfPerson.DataBaseApi
 {
     public interface IPhone_DAO
     {
-        void DeletePhone(int id);
+        void DeletePhone(int idPerson, string numbersOfPhone);
         void AddPhone(int idPerson, string phone);
     }
 }

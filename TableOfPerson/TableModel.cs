@@ -23,6 +23,7 @@ namespace TableOfPerson
         public void Create(Person p)
         {
             db.Create(p);
+            persons = db.Read();
         }
 
         public DataTable Read()
@@ -78,7 +79,7 @@ namespace TableOfPerson
         public void Delete(int id)
         {
             Person per = null;
-            foreach(Person p in persons)
+            foreach (Person p in persons)
             {
                 if (id == p.id)
                 {
@@ -86,6 +87,10 @@ namespace TableOfPerson
                 }
             }
             db.Delete(per);
+        }
+        public void DeletePhone(int idPerson, string numbersOfPhone)
+        {
+            dbPhone.DeletePhone(idPerson, numbersOfPhone);
         }
 
         public List<Person> ReturnPersons()

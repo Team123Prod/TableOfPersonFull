@@ -59,6 +59,16 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             str += $"\t\t<FirstName>{person.fn}</FirstName>\n";
             str += $"\t\t<LastName>{person.ln}</LastName>\n";
             str += $"\t\t<Age>{person.age}</Age>\n";
+            str += $"\t\t<listOfPhones>\n";
+            foreach(Phone ph in person.listOfPhones)
+            {
+                str += $"\t\t<Phone>\n";
+                str += $"\t\t<id>{ph.id}</id>\n";
+                str += $"\t\t<idPerson>{ph.idPerson}</idPerson>\n";
+                str += $"\t\t<phone>{ph.phone}</phone>\n";
+                str += $"\t\t<Phone>\n";
+            }
+            str += $"\t\t</listOfPhones>\n";
             str += "\t</Person>";
             return str;
         }
@@ -71,8 +81,19 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             person.fn = args[6];
             person.ln = args[10];
             person.age = Int32.Parse(args[14]);
+
+
             return person;
         }
-        
+        private Phone FromPhoneXML(string str)
+        {
+            Phone person = new Phone();
+            str = str.Replace("\t", "");
+            string[] args = str.Split('<', '>');
+
+
+            return person;
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableOfPerson.DataBaseApi.PersonDAO_File
 {
-    public abstract class PersonDAO_File: IPerson_DAO
+    public abstract class PersonDAO_File: IPerson_DAO, IPhone_DAO
     {
         protected string path = "";
         public PersonDAO_File(string path)
@@ -58,14 +58,40 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
         abstract protected List<Person> Load();
         abstract protected void Save(List<Person> people);
 
-        public void AddPhone(int id, string phone)
+        public void AddPhone(int idPerson, string phone)
         {
-            throw new NotImplementedException();
+            List<Person> people = Load();
+            Person add = people.Find((x) => x.id == idPerson);
+            if (add != null)
+            {
+                int i = people.IndexOf(add);
+                int idP = (people.ElementAt(i).listOfPhones.Count + people.ElementAt(i).fn.Length) * 3;
+                people.ElementAt(i).listOfPhones.Add(new Phone(idP, idPerson, phone));
+            }
+            Save(people);
         }
 
         public List<Person> Search(string searchLine)
         {
-            throw new NotImplementedException();
+            List<Person> persons = Load();
+            List<Person> list = new List<Person>();
+            foreach (Person p in persons)
+            {
+                if (searchLine == p.id.ToString() || searchLine == p.fn || searchLine == p.ln || searchLine == p.age.ToString())
+                {
+                    list.Add(p);
+                }
+            }
+            return list;
+        }
+
+        public void DeletePhone(int idPerson, string numbersOfPhone)
+        {
+            List<Person> people = Load();
+            Person p = people.Find((x) => x.id == idPerson);
+            Phone phDel = p.listOfPhones.Find((x) => x.phone == numbersOfPhone);
+            p.listOfPhones.Remove(phDel);
+            Save(people);
         }
     }
 }

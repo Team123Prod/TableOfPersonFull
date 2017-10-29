@@ -62,6 +62,7 @@
             this.comboDB.Name = "comboDB";
             this.comboDB.Size = new System.Drawing.Size(121, 21);
             this.comboDB.TabIndex = 18;
+            this.comboDB.SelectedIndexChanged += new System.EventHandler(this.comboDB_SelectedIndexChanged);
             // 
             // btnDelete
             // 
@@ -98,6 +99,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 75);
             this.dataGridView1.Name = "dataGridView1";

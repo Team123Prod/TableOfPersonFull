@@ -19,9 +19,8 @@ namespace TableOfPerson.Controls
 
             tm = new TableModel();
 
-            comboDB.SelectedIndex = 0;
+            comboDB.SelectedIndex = 13;
 
-            tm.SetDataBase("Mock");
         }
         private Person GetPerson()
         {
@@ -80,6 +79,11 @@ namespace TableOfPerson.Controls
             fUpdate.Hide();
             fUpdate.Show();
 
+        }
+
+        private void comboDB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tm.SetDataBase(comboDB.SelectedItem.ToString());
         }
     }
 }

@@ -50,6 +50,7 @@
             this.labelAge = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
             this.labelLn = new System.Windows.Forms.Label();
+            this.btnDeletePhone = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnDeletePhone);
             this.groupBox4.Controls.Add(this.btnAddPhone);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.txtPhone);
@@ -82,9 +84,9 @@
             // 
             // btnAddPhone
             // 
-            this.btnAddPhone.Location = new System.Drawing.Point(70, 109);
+            this.btnAddPhone.Location = new System.Drawing.Point(9, 108);
             this.btnAddPhone.Name = "btnAddPhone";
-            this.btnAddPhone.Size = new System.Drawing.Size(79, 23);
+            this.btnAddPhone.Size = new System.Drawing.Size(79, 24);
             this.btnAddPhone.TabIndex = 40;
             this.btnAddPhone.Text = "Add";
             this.btnAddPhone.UseVisualStyleBackColor = true;
@@ -140,7 +142,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(20, 74);
+            this.label6.Location = new System.Drawing.Point(20, 152);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 16);
             this.label6.TabIndex = 33;
@@ -148,13 +150,14 @@
             // 
             // txtAge
             // 
-            this.txtAge.Location = new System.Drawing.Point(82, 68);
+            this.txtAge.Location = new System.Drawing.Point(82, 152);
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(111, 22);
             this.txtAge.TabIndex = 37;
             // 
             // txtId
             // 
+            this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(82, 32);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(111, 22);
@@ -173,7 +176,7 @@
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(83, 147);
+            this.txtLastName.Location = new System.Drawing.Point(83, 109);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(111, 22);
             this.txtLastName.TabIndex = 36;
@@ -182,7 +185,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(6, 112);
+            this.label9.Location = new System.Drawing.Point(6, 74);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 16);
             this.label9.TabIndex = 31;
@@ -190,7 +193,7 @@
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(83, 109);
+            this.txtFirstName.Location = new System.Drawing.Point(83, 71);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(112, 22);
             this.txtFirstName.TabIndex = 35;
@@ -199,7 +202,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(3, 150);
+            this.label8.Location = new System.Drawing.Point(6, 112);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 16);
             this.label8.TabIndex = 32;
@@ -281,6 +284,16 @@
             this.labelLn.TabIndex = 23;
             this.labelLn.Text = "LastName:  ";
             // 
+            // btnDeletePhone
+            // 
+            this.btnDeletePhone.Location = new System.Drawing.Point(94, 108);
+            this.btnDeletePhone.Name = "btnDeletePhone";
+            this.btnDeletePhone.Size = new System.Drawing.Size(115, 23);
+            this.btnDeletePhone.TabIndex = 41;
+            this.btnDeletePhone.Text = "Delete phone";
+            this.btnDeletePhone.UseVisualStyleBackColor = true;
+            this.btnDeletePhone.Click += new System.EventHandler(this.btnDeletePhone_Click);
+            // 
             // PUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,5 +339,6 @@
         private System.Windows.Forms.Label labelLn;
         private System.Windows.Forms.ListBox listBoxPhones;
         private System.Windows.Forms.Label labelFn;
+        private System.Windows.Forms.Button btnDeletePhone;
     }
 }
