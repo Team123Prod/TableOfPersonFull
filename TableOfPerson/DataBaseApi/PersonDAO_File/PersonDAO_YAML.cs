@@ -23,10 +23,10 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
                 fs.Close();
             }
             string[] lines = File.ReadAllLines(path);
-            string[] YAMLlines = new string[(lines.Length - 1) / 4];
+            string[] YAMLlines = new string[(lines.Length - 1)];
             for (int i = 1, k = 1; i < lines.Length; i++)
             {
-                if (i != 4 * k + 1)
+                if (i != 8 * k + 1)
                     YAMLlines[k - 1] += lines[i] + "\n";
                 else
                     YAMLlines[++k - 1] += lines[i] + "\n";
@@ -58,6 +58,12 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             str += $"\nFirstName: {person.fn}";
             str += $"\nLastName: {person.ln}";
             str += $"\nAge: {person.age}";
+            foreach (Phone ph in person.listOfPhones)
+            {
+                str += $"\n- Id: { ph.id } ";
+                str += "\n idPerson:" + ph.idPerson + " ";
+                str += "\n phone:" + ph.phone + " }";
+            }
             return str;
         }
         private Person FromYAML(string yaml_string)
@@ -68,8 +74,26 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             person.fn = args[4].Trim();
             person.ln = args[6].Trim();
             person.age = Int32.Parse(args[8].Trim());
+            person.listOfPhones = FromPhoneYAML(yaml_string);
             return person;
         }
-        
+        private List<Phone> FromPhoneYAML(string yml_string)
+        {
+            string[] str = yml_string.Split('\n', ':', '-');
+            List<Phone> ListPhone = new List<Phone>();
+            try
+            {
+                for (int i = 11; i < str.Length; i += 7)
+                {
+                    ListPhone.Add(new Phone(Int32.Parse(str[i]), Int32.Parse(str[i + 2]), str[i + 4]));
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
+            return ListPhone;
+        }
+
     }
 }

@@ -22,7 +22,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
                 fs.Close();
             }
             string[] lines = File.ReadAllLines(path);
-            string[] XMLlines = new string[(lines.Length - 2) / 6];
+            string[] XMLlines = new string[(lines.Length - 2) / 15];
             for (int i = 1, k = 0; i < lines.Length - 1; i++)
             {
                 if (lines[i] == "\t</Person>")
@@ -66,7 +66,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
                 str += $"\t\t<id>{ph.id}</id>\n";
                 str += $"\t\t<idPerson>{ph.idPerson}</idPerson>\n";
                 str += $"\t\t<phone>{ph.phone}</phone>\n";
-                str += $"\t\t<Phone>\n";
+                str += $"\t\t</Phone>\n";
             }
             str += $"\t\t</listOfPhones>\n";
             str += "\t</Person>";
@@ -81,18 +81,25 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             person.fn = args[6];
             person.ln = args[10];
             person.age = Int32.Parse(args[14]);
+            person.listOfPhones = FromPhoneXML(args);
 
 
             return person;
         }
-        private Phone FromPhoneXML(string str)
+        private List<Phone> FromPhoneXML(string[] str)
         {
-            Phone person = new Phone();
-            str = str.Replace("\t", "");
-            string[] args = str.Split('<', '>');
+            List<Phone> ListPhone = new List<Phone>();
+            try
+            {
+                for (int i = 22; i < str.Length; i += 16)
+                {
+                    ListPhone.Add(new Phone(Int32.Parse(str[i]), Int32.Parse(str[i + 4]), str[i + 8]));
+                }
+            }
+            catch (Exception e)
+            { }
 
-
-            return person;
+            return ListPhone;
         }
 
     }

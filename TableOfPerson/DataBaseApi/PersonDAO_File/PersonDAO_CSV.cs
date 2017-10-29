@@ -34,7 +34,7 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
         protected override void Save(List<Person> people)
         {
             StreamWriter file = new StreamWriter(path);
-            file.WriteLine("Id, Fn, Ln, Age");
+            file.WriteLine("Id, Fn, Ln, Age, listOfPhones");
             foreach (Person person in people)
             {
                 file.WriteLine(ToCSV(person));
@@ -49,7 +49,15 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             str += person.id + ", ";
             str += person.fn + ", ";
             str += person.ln + ", ";
-            str += person.age;
+            str += person.age + ", ";
+            str += "\"[";
+            foreach (Phone ph in person.listOfPhones)
+            {
+                str += "{id:" + ph.id + ",";
+                str += "idPerson:" + ph.idPerson + ", ";
+                str += "phone:" + ph.phone + " }";
+            }
+            str += "]\"";
             return str;
         }
 
@@ -61,7 +69,25 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             person.fn = args[1].Trim();
             person.ln = args[2].Trim();
             person.age = Int32.Parse(args[3].Trim());
+            person.listOfPhones = FromPhoneCSV(csv_string);
             return person;
+        }
+        private List<Phone> FromPhoneCSV(string csv_string)
+        {
+            string[] str = csv_string.Split(':', ',', '}');
+            List<Phone> ListPhone = new List<Phone>();
+            try
+            {
+                for (int i = 5; i < str.Length; i += 6)
+                {
+                    ListPhone.Add(new Phone(Int32.Parse(str[i]), Int32.Parse(str[i + 2]), str[i + 4]));
+                }
+            }
+            catch(Exception e)
+            {
+            }
+
+            return ListPhone;
         }
     }
 }

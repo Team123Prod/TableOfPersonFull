@@ -61,20 +61,46 @@ namespace TableOfPerson.DataBaseApi.PersonDAO_File
             str += $"Id: {person.id},";
             str += $"FirstName: {person.fn},";
             str += $"LastName: {person.ln},";
-            str += $"Age: {person.age}";
+            str += $"Age: {person.age},";
+            str += $"listOfPhones: ";
+            foreach (Phone ph in person.listOfPhones)
+            {
+                str += "{id:" + ph.id + ",";
+                str += "idPerson:" + ph.idPerson + ", ";
+                str += "phone:" + ph.phone + " };";
+            }
+ 
             str += "}";
             return str;
         }
         private Person FromJSON(string json_string)
         {
             Person person = new Person();
-            string[] args = json_string.Split(':', ',', '}');
+            string[] args = json_string.Split(':', ',', '}', ']');
             person.id = Int32.Parse(args[1].Trim());
             person.fn = args[3].Trim();
             person.ln = args[5].Trim();
             person.age = Int32.Parse(args[7].Trim());
+            person.listOfPhones = FromPhoneJSON(json_string);
             return person;
         }
-        
+        private List<Phone> FromPhoneJSON(string json_string)
+        {
+            string[] str = json_string.Split(':', ',', '}', ';', ']');
+            List<Phone> ListPhone = new List<Phone>();
+            try
+            {
+                for (int i = 10; i < str.Length; i += 6)
+                {
+                    ListPhone.Add(new Phone(Int32.Parse(str[i]), Int32.Parse(str[i + 2]), str[i + 4]));
+                }
+            }
+            catch (Exception e)
+            { }
+
+
+            return ListPhone;
+        }
+
     }
 }
